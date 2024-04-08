@@ -23,16 +23,16 @@ def create_array():
 def convert_to_bytes(arr):
     return arr.tobytes()
 
-def recreate_array(arr_bytes):
-    return np.frombuffer(arr_bytes).reshape(1000, 1000)
+def recreate_array(arr_bytes,arr_type):
+    return np.frombuffer(arr_bytes,dtype=arr_type,).reshape(1000, 1000)
 
 def main():
     arr = create_array()
+    arr_type = arr.dtype
     arr_bytes = convert_to_bytes(arr)
-    recreated_arr = recreate_array(arr_bytes)
-    print(f"Original array:\n{arr}\n")
-    print(f"Array in bytes:\n{arr_bytes}\n")
-    print(f"Recreated array:\n{recreated_arr}")
+    recreated_arr = recreate_array(arr_bytes,arr_type)
+    print(f"Original array:\n{arr}")
     
+    print(f"Recreated array:\n{recreated_arr}")
 if __name__ == "__main__":
     main()
